@@ -1,12 +1,34 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 const Account = mongoose.Schema({
-	userid: {type:String, required:true, unique:true},
-	password: {type:String, required:true, select:false},
-	username: {type:String, required:true},
-	email: {type:String}
+	userid: {
+		type: String,
+		required: true,
+		unique: true,
+		trim: true,
+		match: [/^.{4,12}$/, '4-12 length available']
+	},
+	password: {
+		type: String,
+		required: true,
+		select: false,
+	},
+	username: {
+		type: String,
+		required: true,
+		trim: true,
+		match: [/^.{4,12}$/, '4-12 length available']
+	},
+	email: {
+		type: String,
+		trim: true,
+		match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[a-zA-Z]{2,}$/, 'full email adress available']
+	}
 }, {
-	toObject:{virtuals:true}
+	toObject:{
+		virtuals:true
+	}
 });
 
 Account.virtual('passwordConfirmation')
@@ -25,25 +47,44 @@ Account.virtual('newPassword')
 .get(function() { return this._newPassword; })
 .set(function(value) { this._newPassword=value; });
 
-Account.path('password').validate(function(v) {
-	let user = this;
+Account.pre('save', function(next) {
+	let userData = this;
+	if(!userData.isModified('password')) {
+		return next();
+	} else {
+		userData.password = bcrypt.hashSync(userData.password);
+		return next();
+	}
+});
 
-	if(user.isNew) {
-		if(!user.passwordConfirmation) {
-			user.invalidate('passwordConfirmation', 'password confirmation is required');
+Account.methods.authenticate = function(password) {
+	let userData = this;
+	return bcrypt.compareSync(password, userData.password);
+}
+
+Account.path('password').validate(function(v) {
+	let passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
+	let passwordRegexError = '8-12 length available';
+	let userData = this;
+
+	if(userData.isNew) {
+		if(!userData.passwordConfirmation) {
+			userData.invalidate('passwordConfirmation', 'password confirmation is required');
+		} else if(userData.password !== userData.passwordConfirmation) {
+			userData.invalidate('passwordConfirmation', 'password confirmation is not matched');
+		} else if(!passwordRegex.test(userData.password)) {
+			userData.invalidate('password', passwordRegexError);
 		}
-		if(user.password !== user.passwordConfirmation) {
-			user.invalidate('passwordConfirmation', 'password confirmation is not matched');
-		}
-	} else if(!user.isNew) {
-		if(!user.currentPassword) {
-			user.invalidate('currentPassword', 'current password is required');
-		}
-		if(user.currentPassword && (user.currentPassword != user.originalPassword)) {
-			user.invalidate('currentPassword', 'current password is invalid');
-		}
-		if(user.newPassword !== user.passwordConfirmation) {
-			user.invalidate('passwordConfirmation', 'password confirmation is not matched');
+	} else if(!userData.isNew) {
+		if(!userData.currentPassword) {
+			userData.invalidate('currentPassword', 'current password is required');
+		} else if(userData.currentPassword &&
+			!(bcrypt.compareSync(userData.currentPassword, userData.originalPassword))) {
+			userData.invalidate('currentPassword', 'current password is invalid');
+		} else if(userData.newPassword !== userData.passwordConfirmation) {
+			userData.invalidate('passwordConfirmation', 'password confirmation is not matched');
+		} else if(!passwordRegex.test(userData.password)) {
+			userData.invalidate('newPassword', passwordRegexError);
 		}
 	}
 });

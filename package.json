@@ -10,9 +10,12 @@
   "author": "Jihwan Marc Kim",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "method-override": "^2.3.6",
     "mongoose": "^4.6.1",
     "nodemon": "^1.11.0"

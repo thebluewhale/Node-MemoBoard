@@ -2,6 +2,8 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var flash = require('connect-flash');
+var session = require('express-session');
 // for Router
 var home = require('./routes/home');
 var account = require('./routes/account');
@@ -21,6 +23,12 @@ app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
+app.use(flash());
+app.use(session({
+	secret: "Node-MemoBoard",
+	resave: false,
+	saveUninitialized: true
+}));
 
 // Router settings
 app.use('/', home);

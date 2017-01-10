@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	</head>
+		<% include ../partials/head %>
+	<body>
+		<h3>Create Account</h3>
+		<form class="" action="/account/<%= userData.userid %>?_method=put" method="post">
+			<div class="">
+				<label for="userid">User ID</label>
+				<input type="text" id="userid" name="userid" value="<%= userData.userid %>">
+			</div>
+			<div class="">
+				<label for="username">User Name</label>
+				<input type="text" id="username" name="username" value="<%= userData.username %>">
+			</div>
+			<div class="">
+				<label for="email">E-mail</label>
+				<input type="text" id="email" name="email" value="<%= userData.email %>">
+			</div>
+			<div class="">
+				<label for="password">Current Password</label>
+				<input type="password" id="currentPassword" name="currentPassword" value="">
+			</div>
+			<div class="">
+				<label for="password">New Password</label>
+				<input type="password" id="newPassword" name="newPassword" value="">
+			</div>
+			<div class="">
+				<label for="passwordConfirmation">Password Confirm</label>
+				<input type="password" id="passwordConfirmation" name="passwordConfirmation" value="">
+			</div>
+			<div class="">
+				<button type="submit" name="button">Modify</button>
+			</div>
+		</form>
+	</body>
+
+</html>
