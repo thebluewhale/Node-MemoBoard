@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<% include ../partials/head %>
+	</head>
+
+	<body>
+		<div class="w3-container">
+			<h3>All Users</h3>
+			<ul>
+				<% if((userData == null) || (userData.length == 0)) { %>
+					<div>No User Data</div>
+				<% } %>
+				<% userData.forEach(function(userData) { %>
+					<li>
+						<a href="/account/<%= userData.userid %>">
+							<%= userData.userid %>
+						</a>
+					</li>
+				<% }); %>
+			</ul>
+		</div>
+	</body>
+
+</html>
