@@ -7,32 +7,34 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-	Account.findOne({_id: id}, function(err, account) {
+	Account.findOne({userid: id}, function(err, account) {
 		done(err, account);
 	});
 });
 
 passport.use('local-login',
 	new localStratergy({
-		useridField: 'userid',
+		usernameField: 'userid',
 		passwordField: 'password',
 		passReqToCallback: true
 	},
 	function(req, userid, password, done) {
-		Account.findOne({_id: userid})
+		Account.findOne({userid: userid})
 		.select({password: 1})
 		.exec(function(err, account) {
 			if(err) return done(err);
 
-			if(account && account.authentificate(password)) {
+			if(account && account.authenticate(password)) {
+				console.log('login success');
 				return done(null, account);
 			} else {
+				console.log('login failed');
 				req.flash('userid', userid);
 				req.flash('errors', {login: 'invalid ID or password'});
 				return done(null, false);
 			}
 		});
-	})
-);
+	}
+));
 
 module.exports = passport;

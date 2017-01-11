@@ -25,14 +25,14 @@ router.post('/signin', function(req, res, next) {
 			errors.userid = 'enter your ID';
 		} else if(!req.body.password) {
 			isValid = false;
-			error.password = 'enter your password';
+			errors.password = 'enter your password';
 		}
 
 		if(isValid) {
 			next();
 		} else {
 			req.flash('errors', errors);
-			req.redirect('/signin');
+			res.redirect('/signin');
 		}
 	},
 	passport.authenticate('local-login', {
