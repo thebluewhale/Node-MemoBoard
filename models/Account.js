@@ -18,7 +18,7 @@ const Account = mongoose.Schema({
 		type: String,
 		required: true,
 		trim: true,
-		match: [/^.{4,12}$/, '4-12 length available']
+		match: [/^.{3,12}$/, '3-12 length available']
 	},
 	email: {
 		type: String,

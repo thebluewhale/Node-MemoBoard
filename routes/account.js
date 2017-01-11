@@ -14,13 +14,21 @@ router.route('/').get(function(req, res) {
 
 // Create
 router.get('/create', function(req, res) {
-	res.render('account/create', {user:{}});
+	let userData = req.flash('account')[0] || {};
+	let errors = req.flash('errors')[0] || {};
+	res.render('account/create', {userData:userData, errors:errors});
 });
 
 router.post('/', function(req, res) {
 	Account.create(req.body,function(err, user) {
-		if(err) return res.json(err);
-		else res.redirect('/account');
+		if(err) {
+			req.flash('account', req.body);
+			req.flash('errors', parseError(err));
+			return res.redirect('/account/create');
+		}
+		else {
+			res.redirect('/account');
+		}
 	});
 });
 
@@ -60,5 +68,20 @@ router.put('/:userid', function(req, res, next) {
 		});
 	});
 });
+
+function parseError(err) {
+	let parsed = {};
+	if(err.name == 'ValidationError') {
+		for(let name in err.errors) {
+			let validationError = err.errors[name];
+			parsed[name] = { message: validationError.message };
+		}
+	} else if(err.code == '11000' && err.errmsg.indexOf('username') > 0) {
+		parsed.username = { message: 'this user name already exists' };
+	} else {
+		parsed.unhandled = JSON.stringify(err);
+	}
+	return parsed;
+}
 
 module.exports = router;

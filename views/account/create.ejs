@@ -16,6 +16,9 @@
 			<div class="">
 				<label for="username">User Name</label>
 				<input type="text" id="username" name="username" value="">
+				<% if(errors.username) { %>
+					<p><%= errors.username %></p>
+				<% } %>
 			</div>
 			<div class="">
 				<label for="email">E-mail</label>
