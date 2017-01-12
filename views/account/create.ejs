@@ -5,28 +5,34 @@
 	<head>
 
 	</head>
-		<% include ../partials/head %>
+		<% include ../partials/navi %>
 	<body>
 		<h3>Create Account</h3>
 		<form class="" action="/account" method="post">
 			<div class="">
 				<label for="userid">User ID</label>
 				<input type="text" id="userid" name="userid" value="">
+				<% if(errors.userid) { %>
+					<span><%= errors.userid.message %></span>
+				<% } %>
 			</div>
 			<div class="">
 				<label for="username">User Name</label>
 				<input type="text" id="username" name="username" value="">
-				<% if(errors.username) { %>
-					<p><%= errors.username %></p>
-				<% } %>
 			</div>
 			<div class="">
 				<label for="email">E-mail</label>
 				<input type="text" id="email" name="email" value="">
+				<% if(errors.email) { %>
+					<span><%= errors.email.message %></span>
+				<% } %>
 			</div>
 			<div class="">
 				<label for="password">Password</label>
 				<input type="password" id="password" name="password" value="">
+				<% if(errors.password) { %>
+					<span><%= errors.password.message %></span>
+				<% } %>
 			</div>
 			<div class="">
 				<label for="passwordConfirmation">Password Confirm</label>

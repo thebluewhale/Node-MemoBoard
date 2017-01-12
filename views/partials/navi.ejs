@@ -7,9 +7,14 @@
 <nav class="w3-sidenav w3-white w3-card-2" style="display:none" id="mySidenav">
 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-large">Close &times;</a>
 	<a href="/">Home</a>
-	<a href="/signin">Sign In</a>
-	<a href="/account/create">Create Account</a>
+	<% if(isAuthenticated) { %>
+		<a href="/logout">Log Out</a>
+	<% } else { %>
+		<a href="/login">Log In</a>
+		<a href="/account/create">Create Account</a>
+	<% } %>
 	<a href="/account">All Users</a>
+	<a href='/posts'>POSTS</a>
 </nav>
 
 <div class="w3-container w3-teal">

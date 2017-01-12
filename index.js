@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var session = require('express-session');
-var passport = require('./config/passport');
+var passport = require('./utils/passport');
 // for Router
 var home = require('./routes/home');
 var account = require('./routes/account');
@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
 // Router settings
 app.use('/', home);
 app.use('/account', account);
-app.use('/post', post);
+app.use('/posts', post);
 
 // Port settingx
 app.listen(3000, function() { console.log('port : 3000'); });

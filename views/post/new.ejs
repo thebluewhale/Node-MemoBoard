@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<% include ../partials/navi %>
+	</head>
+
+	<body>
+		<div class="w3-container w3-center">
+			<h1 class="w3-text-grey">Write</h1>
+		</div>
+
+		<form action="/posts" method="post">
+			<div>
+				<h3>New Post</h3>
+			</div>
+			<fieldset>
+				<div>
+					<label for="title">Title</label>
+					<input type="text" id="title" name="title" value="">
+				</div>
+				<div>
+					<label for="content">Content</label>
+					<textarea id="content" name="content" rows="10"></textarea>
+				</div>
+			</fieldset>
+			<button type="submit">Create</button>
+		</form>
+	</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<% include ../partials/navi %>
+	</head>
+
+	<body>
+		<div class="w3-container w3-center">
+			<h1 class="w3-text-grey">Show</h1>
+		</div>
+
+		<div>
+			<a href='/posts/<%= posts._id %>/edit'>Edit</button>
+		</div>
+		<div>
+			<form action="/posts/<%= posts._id %>?_method=delete" method="post">
+				<a href="#" onclick='confirm("delete?") ? this.parentElement.submit() : null;'>Delete</a>
+			</form>
+		</div>
+
+		<div>
+			<h3><%= posts.title %></h3>
+		</div>
+		<div>
+			<span>created at <%= posts.createdDate %></span>
+			<% if(posts.updatedAt) %>
+				<span>updated at <%= posts.updatedDate %></span>
+		</div>
+
+		<div>
+			<h3><%= posts.content %><h3>
+		</div>
+	</body>
+
+</html>

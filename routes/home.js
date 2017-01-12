@@ -1,23 +1,23 @@
 var express = require('express');
 var router  = express.Router();
-var passport = require('../config/passport');
+var passport = require('../utils/passport');
 
 // Router for home
 router.get('/', function(req, res){
-  res.render('main/home');
+  res.render('home/home');
 });
 
-router.get('/signin', function(req, res) {
+router.get('/login', function(req, res) {
 	let userid = req.flash('userid')[0];
 	let errors = req.flash('errors')[0] || {};
 
-	res.render('main/signin', {
+	res.render('home/login', {
 		userid: userid,
 		errors: errors
 	});
 });
 
-router.post('/signin', function(req, res, next) {
+router.post('/login', function(req, res, next) {
 		let errors = {};
 		let isValid = true;
 		if(!req.body.userid) {
@@ -32,12 +32,12 @@ router.post('/signin', function(req, res, next) {
 			next();
 		} else {
 			req.flash('errors', errors);
-			res.redirect('/signin');
+			res.redirect('/login');
 		}
 	},
 	passport.authenticate('local-login', {
 		successRedirect: '/',
-		failureRedirect: '/signin'
+		failureRedirect: '/login'
 	})
 );
 

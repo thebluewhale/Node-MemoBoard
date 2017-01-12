@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<% include ../partials/navi %>
+	</head>
+
+	<body>
+		<div class="w3-container w3-center">
+			<h1 class="w3-text-grey">Edit</h1>
+		</div>
+
+		<form action="/posts/<%= posts._id %>?_method=put" method="post">
+			<div>
+				<h3> Edit Post</h3>
+			</div>
+			<fieldset>
+				<div>
+					<label for="title">title</label>
+					<input type="text" id="title" name="title" value="<%= posts.title %>">
+				</div>
+				<div>
+					<label for="content">Content</label>
+					<textarea id="content" name="content" rows="10"><%= posts.content %></textarea>
+				</div>
+			</fieldset>
+			<button type="submit">Modify</button>
+		</form>
+
+
+
+
+
+	</body>
+
+</html>

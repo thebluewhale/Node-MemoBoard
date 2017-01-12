@@ -3,19 +3,25 @@
 <html>
 
 	<head>
-		<% include ../partials/head %>
+		<% include ../partials/navi %>
 	</head>
 
 	<body>
-		<form class="" action="/signin" method="post">
+		<form class="" action="/login" method="post">
 			<p>login</p>
 			<div class="">
 				<label for="userid">ID</label>
 				<input type="text" id="userid" name="userid" value="">
+				<% if(errors.userid) { %>
+					<span><%= errors.userid %></span>
+				<% } %>
 			</div>
 			<div class="">
 				<label for="password">PASSWROD</label>
 				<input type="password" id="password" name="password" value="">
+				<% if(errors.password) { %>
+					<span><%= errors.password %></span>
+				<% } %>
 			</div>
 			<div class="">
 				<button type="submit" name="button">Login</button>
