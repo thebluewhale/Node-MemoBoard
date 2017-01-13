@@ -7,30 +7,32 @@
 	</head>
 
 	<body>
-		<div class="w3-container w3-center">
-			<h1 class="w3-text-grey">Show</h1>
-		</div>
-
-		<div>
-			<a href='/posts/<%= posts._id %>/edit'>Edit</button>
-		</div>
-		<div>
+		<div class="post-body">
+			<a href='/posts/<%= posts._id %>/edit'>
+				<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
+					Edit
+				</button>
+			</a>
 			<form action="/posts/<%= posts._id %>?_method=delete" method="post">
-				<a href="#" onclick='confirm("delete?") ? this.parentElement.submit() : null;'>Delete</a>
+				<a href="#" onclick='confirm("delete?") ? this.parentElement.submit() : null;'>
+					<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
+					Delete
+				</button>
+				</a>
 			</form>
-		</div>
-
-		<div>
-			<h3><%= posts.title %></h3>
-		</div>
-		<div>
-			<span>created at <%= posts.createdDate %></span>
-			<% if(posts.updatedAt) %>
-				<span>updated at <%= posts.updatedDate %></span>
-		</div>
-
-		<div>
-			<h3><%= posts.content %><h3>
+			<div class="w3-card-4 post-upper-margin">
+				<div>
+					<h2 class="w3-container w3-teal"><%= posts.title %></h3>
+				</div>
+				<div class="w3-card-4 post-upper-margin post-content-size">
+					<h3 class="w3-container"><%= posts.content %><h3>
+				</div>
+			</div>
+			<div class="w3-container post-upper-margin">
+				<span>created at <%= posts.createdDate %></span>
+				<% if(posts.updatedAt) %>
+					<span>updated at <%= posts.updatedDate %></span>
+			</div>
 		</div>
 	</body>
 

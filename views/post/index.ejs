@@ -7,37 +7,36 @@
 	</head>
 
 	<body>
-		<div class="w3-container w3-center">
-			<h1 class="w3-text-grey">POSTS</h1>
-		</div>
-
-		<div>
-			<a href='/posts/new'>Write</button>
-		</div>
-
-		<div>
-			<table>
-				<thread>
-					<tr>
-						<th>TItle</th>
-						<th>Date</th>
-					</tr>
-				</thread>
-				<tbody>
-					<% if(posts == null || posts.length == 0) { %>
-						<tr>
-							<td>No post now</td>
+		<div class="post-body">
+			<a href="/posts/write">
+				<button type="button" class="w3-btn w3-teal button-size user-detail-margin">
+					Write
+				</button>
+			</a>
+			<div class="post-upper-margin">
+				<table class="w3-table-all w3-hoverable">
+					<thread>
+						<tr class="w3-teal">
+							<th>TItle</th>
+							<th>Date</th>
 						</tr>
-					<% } else { posts.forEach(function(post) { %>
-						<tr>
-							<td>
-								<a href="/posts/<%= post._id %>"><div><%= post.title %></div></a>
-							</td>
-							<td><%= post.createdDate %>, <%= post.createdTime %></td>
-						</tr>
-					<% })} %>
-				</tbody>
-			</table>
+					</thread>
+					<tbody>
+						<% if(posts == null || posts.length == 0) { %>
+							<tr>
+								<td>No post now</td>
+							</tr>
+						<% } else { posts.forEach(function(post) { %>
+							<tr>
+								<td>
+									<a href="/posts/<%= post._id %>"><div><%= post.title %></div></a>
+								</td>
+								<td><%= post.createdDate %>, <%= post.createdTime %></td>
+							</tr>
+						<% })} %>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 

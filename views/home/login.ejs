@@ -7,26 +7,32 @@
 	</head>
 
 	<body>
-		<form class="" action="/login" method="post">
-			<p>login</p>
-			<div class="">
-				<label for="userid">ID</label>
-				<input type="text" id="userid" name="userid" value="">
-				<% if(errors.userid) { %>
-					<span><%= errors.userid %></span>
-				<% } %>
-			</div>
-			<div class="">
-				<label for="password">PASSWROD</label>
-				<input type="password" id="password" name="password" value="">
-				<% if(errors.password) { %>
-					<span><%= errors.password %></span>
-				<% } %>
-			</div>
-			<div class="">
-				<button type="submit" name="button">Login</button>
-			</div>
-		</form>
+		<div class="login-body">
+			<form class=class="w3-card-4" action="/login" method="post">
+				<!--
+				<div class="w3-container w3-teal w3-center">
+					<h2>Log In</h2>
+				</div>
+				-->
+				<div class="login-upper-margin">
+					<label for="userid" class="w3-label w3-text-teal">ID</label>
+					<input type="text" id="userid" class="w3-input w3-border w3-sand" name="userid" value="">
+					<% if(errors.userid) { %>
+						<span><%= errors.userid %></span>
+					<% } %>
+				</div>
+				<div class="login-upper-margin">
+					<label for="password" class="w3-label w3-text-teal">PASSWROD</label>
+					<input type="password" id="password" class="w3-input w3-border w3-sand" name="password" value="">
+					<% if(errors.password) { %>
+						<span><%= errors.password %></span>
+					<% } %>
+				</div>
+				<div class="login-upper-margin">
+					<button type="submit" class="w3-btn w3-teal button-size" name="button">Login</button>
+				</div>
+			</form>
+		</div>
 	</body>
 
 </html>

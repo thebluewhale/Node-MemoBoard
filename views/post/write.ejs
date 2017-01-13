@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<% include ../partials/navi %>
+	</head>
+
+	<body>
+		<div class="post-body">
+			<form action="/posts" method="post">
+				<div class="post-upper-margin">
+					<label for="title" class="w3-label w3-text-teal">Title</label>
+					<input type="text" id="title" class="w3-input w3-border w3-sand" name="title" value="">
+				</div>
+				<div class="post-upper-margin">
+					<label for="content" class="w3-label w3-text-teal">Content</label>
+					<textarea id="content" class="w3-input w3-border w3-sand" name="content" rows="10"></textarea>
+				</div>
+				<div class="create-account-upper-margin">
+					<button type="submit" class="w3-btn w3-teal button-size post-upper-margin">Write</button>
+				</div>
+			</form>
+		</div>
+	</body>
+
+</html>

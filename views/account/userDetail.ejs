@@ -7,16 +7,15 @@
 	</head>
 
 	<body>
-		<div class="w3-container">
-			<h3>User Details</h3>
-			<ul>
-				<li>User ID : <%= userData.userid %></li>
-				<li>User Name : <%= userData.username %></li>
-				<li>E-mail : <%= userData.email %></li>
+		<div class="user-detail-body">
+			<ul class="w3-ul">
+				<li class="w3-padding-16">User ID : <%= userData.userid %></li>
+				<li class="w3-padding-16">User Name : <%= userData.username %></li>
+				<li class="w3-padding-16">E-mail : <%= userData.email %></li>
 			</ul>
-			<button type="button">
-				<a href="/account/<%= userData.userid %>/edit">Edit</a>
-			</button>
+			<a href="/account/<%= userData.userid %>/edit">
+				<button type="button" class="w3-btn w3-teal button-size user-detail-margin">Edit</button>
+			</a>
 
 		</div>
 	</body>

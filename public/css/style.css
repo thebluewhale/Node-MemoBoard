@@ -1,3 +1,67 @@
 .home h1{
   color: darkseagreen;
 }
+
+.button-size {
+	width: 30%;
+	height: 100%;
+}
+
+.login-body {
+	margin: auto;
+	margin-top: 5%;
+	width: 50%;
+	max-width: 400px;
+}
+
+.login-upper-margin {
+	margin-top: 20px;
+}
+
+.create-account-body {
+	margin: auto;
+	margin-top: 5%;
+	width: 50%;
+	max-width: 400px;
+}
+
+.create-account-upper-margin {
+	margin-top: 10px;
+}
+
+.user-detail-body {
+	margin: auto;
+	margin-top: 5%;
+	width: 50%;
+	max-width: 400px;
+}
+
+.user-detail-margin {
+	margin-top: 20px;
+}
+
+.edit-account-upper-margin {
+	margin-top: 10px;
+}
+
+.post-body {
+	min-width: 300px;
+	max-width: 1000px;
+	margin: auto;
+	margin-top: 5%;
+}
+
+.post-upper-margin {
+	margin-top: 20px;
+}
+
+.post-write-fieldset-border {
+	border-color: white;
+}
+
+.post-content-size {
+	min-width: 300px;
+	max-width: 1000px;
+	min-height: 90%;
+	height: 400px;
+}

@@ -11,9 +11,9 @@ router.get('/', function(req, res) {
 	});
 });
 
-// New
-router.get('/new', function(req, res) {
-	res.render('post/new');
+// Write
+router.get('/write', function(req, res) {
+	res.render('post/write');
 });
 
 // create
