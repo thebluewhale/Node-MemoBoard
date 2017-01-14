@@ -3,35 +3,28 @@
 <html>
 
 	<head>
-		<% include ../partials/navi %>
+		<% include ../partials/head %>
 	</head>
 
 	<body>
-		<div class="w3-container w3-center">
-			<h1 class="w3-text-grey">Edit</h1>
+
+		<div class="post-body">
+			<form action="/posts/<%= posts._id %>?_method=put" method="post">
+				<div>
+					<div class="post-upper-margin">
+						<label for="title" class="w3-label w3-text-teal">Title</label>
+						<input type="text" id="title" class="w3-input w3-border w3-sand" name="title" value="<%= posts.title %>">
+					</div>
+					<div class="post-upper-margin">
+						<label for="content" class="w3-label w3-text-teal">Content</label>
+						<textarea id="content" class="w3-input w3-border w3-sand" name="content" rows="10"><%= posts.content %></textarea>
+					</div>
+				</div>
+				<div class="post-upper-margin">
+					<button type="submit" class="w3-btn w3-teal button-size post-upper-margin">Modify</button>
+				</div>
+			</form>
 		</div>
-
-		<form action="/posts/<%= posts._id %>?_method=put" method="post">
-			<div>
-				<h3> Edit Post</h3>
-			</div>
-			<fieldset>
-				<div>
-					<label for="title">title</label>
-					<input type="text" id="title" name="title" value="<%= posts.title %>">
-				</div>
-				<div>
-					<label for="content">Content</label>
-					<textarea id="content" name="content" rows="10"><%= posts.content %></textarea>
-				</div>
-			</fieldset>
-			<button type="submit">Modify</button>
-		</form>
-
-
-
-
-
 	</body>
 
 </html>

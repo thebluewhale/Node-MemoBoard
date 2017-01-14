@@ -3,29 +3,27 @@
 <html>
 
 	<head>
-		<% include ../partials/navi %>
+		<% include ../partials/head %>
 	</head>
 
 	<body>
 		<div class="login-body">
 			<form class=class="w3-card-4" action="/login" method="post">
-				<!--
-				<div class="w3-container w3-teal w3-center">
-					<h2>Log In</h2>
-				</div>
-				-->
 				<div class="login-upper-margin">
 					<label for="userid" class="w3-label w3-text-teal">ID</label>
 					<input type="text" id="userid" class="w3-input w3-border w3-sand" name="userid" value="">
 					<% if(errors.userid) { %>
-						<span><%= errors.userid %></span>
+						<span class="w3-text-pink"><%= errors.userid %></span>
 					<% } %>
 				</div>
 				<div class="login-upper-margin">
-					<label for="password" class="w3-label w3-text-teal">PASSWROD</label>
+					<label for="password" class="w3-label w3-text-teal">Password</label>
 					<input type="password" id="password" class="w3-input w3-border w3-sand" name="password" value="">
 					<% if(errors.password) { %>
-						<span><%= errors.password %></span>
+						<span class="w3-text-pink"><%= errors.password %></span>
+					<% } %>
+					<% if(errors.login) { %>
+						<span class="w3-text-pink"><%= errors.login %></span>
 					<% } %>
 				</div>
 				<div class="login-upper-margin">

@@ -3,11 +3,24 @@
 <html>
 
 	<head>
-		<% include ../partials/navi %>
+		<% include ../partials/head %>
 	</head>
 
 	<body>
 		<div class="post-body">
+			<div class="w3-card-4 post-upper-margin">
+				<div>
+					<h2 class="w3-container w3-teal">Title : <%= posts.title %></h3>
+				</div>
+				<div class="post-upper-margin post-content-size">
+					<h3 class="w3-container"><%= posts.content %><h3>
+				</div>
+				<div class="w3-container post-upper-margin">
+					<span>created at <%= posts.createdDate %></span>
+					<% if(posts.updatedAt) %>
+						<span>updated at <%= posts.updatedDate %></span>
+				</div>
+			</div>
 			<a href='/posts/<%= posts._id %>/edit'>
 				<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
 					Edit
@@ -20,19 +33,6 @@
 				</button>
 				</a>
 			</form>
-			<div class="w3-card-4 post-upper-margin">
-				<div>
-					<h2 class="w3-container w3-teal"><%= posts.title %></h3>
-				</div>
-				<div class="w3-card-4 post-upper-margin post-content-size">
-					<h3 class="w3-container"><%= posts.content %><h3>
-				</div>
-			</div>
-			<div class="w3-container post-upper-margin">
-				<span>created at <%= posts.createdDate %></span>
-				<% if(posts.updatedAt) %>
-					<span>updated at <%= posts.updatedDate %></span>
-			</div>
 		</div>
 	</body>
 

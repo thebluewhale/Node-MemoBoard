@@ -18,6 +18,7 @@ router.get('/write', function(req, res) {
 
 // create
 router.post('/', function(req, res) {
+	req.body.author = req.user._id;
 	Post.create(req.body, function(err, posts) {
 		if(err) res.json(err);
 		else res.redirect('/posts');
@@ -26,7 +27,8 @@ router.post('/', function(req, res) {
 
 // Show
 router.get('/:id', function(req, res) {
-	Post.findOne({_id:req.params.id}, function(err, posts) {
+	Post.findOne({_id:req.params.id})
+		.exec(function(err, posts) {
 		if(err) res.json(err);
 		else res.render('post/show', {posts:posts});
 	});
@@ -42,7 +44,6 @@ router.get('/:id/edit', function(req, res) {
 
 // Update
 router.put('/:id', function(req, res) {
-	req.body.updatedAt = Date.now();
 	Post.findOne({_id:req.params.id}, req.body, function(err, posts) {
 		if(err) res.json(err);
 		else res.redirect('/posts/' + req.params.id);

@@ -25,11 +25,8 @@ passport.use('local-login',
 			if(err) return done(err);
 
 			if(account && account.authenticate(password)) {
-				console.log('login success');
 				return done(null, account);
 			} else {
-				console.log('login failed');
-				req.flash('userid', userid);
 				req.flash('errors', {login: 'invalid ID or password'});
 				return done(null, false);
 			}

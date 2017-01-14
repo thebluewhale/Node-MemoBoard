@@ -5,7 +5,7 @@
 	<head>
 
 	</head>
-		<% include ../partials/navi %>
+		<% include ../partials/head %>
 	<body>
 		<div class="create-account-body">
 			<form class="" action="/account" method="post">
@@ -13,30 +13,33 @@
 					<label for="userid" class="w3-label w3-text-teal">User ID</label>
 					<input type="text" id="userid" class="w3-input w3-border w3-sand" name="userid" value="">
 					<% if(errors.userid) { %>
-						<span><%= errors.userid.message %></span>
+						<span class="w3-text-pink"><%= errors.userid.message %></span>
 					<% } %>
 				</div>
 				<div class="create-account-upper-margin">
 					<label for="username" class="w3-label w3-text-teal">User Name</label>
 					<input type="text" id="username" class="w3-input w3-border w3-sand" name="username" value="">
+					<% if(errors.username) { %>
+						<span class="w3-text-pink"><%= errors.username.message %></span>
+					<% } %>
 				</div>
 				<div class="create-account-upper-margin">
 					<label for="email" class="w3-label w3-text-teal">E-mail</label>
 					<input type="text" id="email" class="w3-input w3-border w3-sand" name="email" value="">
-					<% if(errors.email) { %>
-						<span><%= errors.email.message %></span>
-					<% } %>
 				</div>
 				<div class="create-account-upper-margin">
 					<label for="password" class="w3-label w3-text-teal">Password</label>
 					<input type="password" id="password" class="w3-input w3-border w3-sand" name="password" value="">
 					<% if(errors.password) { %>
-						<span><%= errors.password.message %></span>
+						<span class="w3-text-pink"><%= errors.password.message %></span>
 					<% } %>
 				</div>
 				<div class="create-account-upper-margin">
 					<label for="passwordConfirmation" class="w3-label w3-text-teal">Password Confirm</label>
 					<input type="password" id="passwordConfirmation" class="w3-input w3-border w3-sand" name="passwordConfirmation" value="">
+					<% if(errors.passwordConfirmation) { %>
+						<span class="w3-text-pink"><%= errors.passwordConfirmation.message %></span>
+					<% } %>
 				</div>
 				<div class="create-account-upper-margin">
 					<button type="submit" class="w3-btn w3-teal button-size" name="button">Create</button>

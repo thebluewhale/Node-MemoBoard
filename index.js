@@ -13,8 +13,8 @@ var post = require('./routes/post');
 // DB settings
 mongoose.connect('mongodb://localhost/Node-MemoBoard');
 const db = mongoose.connection;
-db.on('error', function() { console.log('db on error'); });
 db.once('open', function() { console.log('db opened'); });
+db.on('error', function() { console.log('db on error'); });
 
 // Properties settings
 var app = express();
@@ -26,15 +26,16 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(flash());
 app.use(session({
-	secret: "Node-MemoBoard",
-	resave: false,
-	saveUninitialized: true
+	secret: "MySecret",
+	saveUninitialized: true,
+	resave: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 	res.locals.currentUser = req.user;
+	console.log(res.locals.isAuthenticated);
 	next();
 });
 // Router settings
@@ -44,3 +45,4 @@ app.use('/posts', post);
 
 // Port settingx
 app.listen(3000, function() { console.log('port : 3000'); });
+//app.listen(3000, "192.168.0.11");

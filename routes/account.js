@@ -23,6 +23,7 @@ router.get('/create', function(req, res) {
 router.post('/', function(req, res) {
 	Account.create(req.body,function(err, user) {
 		if(err) {
+			console.log(err);
 			req.flash('account', req.body);
 			req.flash('errors', common.parseError(err));
 			return res.redirect('/account/create');

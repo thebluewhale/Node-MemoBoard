@@ -5,10 +5,14 @@ common.parseError = function(err) {
 	if(err.name == 'ValidationError') {
 		for(let name in err.errors) {
 			let validationError = err.errors[name];
-			parsed[name] = { message: validationError.message };
+			if(name == 'userid') { parsed[name] = { message: "User ID is required" } };
+			if(name == 'username') { parsed[name] = { message: "User Name is required" } };
+			if(name == 'email') { parsed[name] = { message: "Emain Address is required" } };
+			if(name == 'password') { parsed[name] = { message: "Password is required" } };
+			if(name == 'passwordConfirmation') { parsed[name] = { message: "Password Confimation is required" } };
 		}
 	} else if(err.code == '11000' && err.errmsg.indexOf('userid') > 0) {
-		parsed.username = { message: 'this user name already exists' };
+		parsed.userid = { message: 'This User ID already exists' };
 	} else {
 		parsed.unhandled = JSON.stringify(err);
 	}
