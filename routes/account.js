@@ -4,7 +4,8 @@ var Account = require('../models/Account');
 var common = require('../utils/common');
 
 // Index page
-router.route('/').get(function(req, res) {
+//router.route('/').get(function(req, res) {
+router.get('/', common.isLoggedIn, function(req, res) {
 	Account.find({})
 	.sort({userid: 1})
 	.exec(function(err, userData) {
@@ -21,14 +22,14 @@ router.get('/create', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	Account.create(req.body,function(err, user) {
+	Account.create(req.body, function(err, user) {
 		if(err) {
 			req.flash('account', req.body);
 			req.flash('errors', common.parseError(err));
 			return res.redirect('/account/create');
 		}
 		else {
-			res.redirect('/account');
+			res.redirect('/login');
 		}
 	});
 });
@@ -51,7 +52,8 @@ router.get('/:userid/edit', function(req, res) {
 			else res.render('account/edit', {userid:req.params.userid, userData:userData, errors:errors});
 		});
 	} else {
-		res.render('account/edit', {userid:req.params.userid, userData:userData, errors:errors});
+		console.log(errors);
+		res.render('account/edit', {userid:req.params.userid, userData:account, errors:errors});
 	}
 });
 
@@ -82,3 +84,15 @@ router.put('/:userid', function(req, res, next) {
 });
 
 module.exports = router;
+
+function checkPermission(req, res, next) {
+	Account.findOne({userid: req.params.userid}, function(err, userData) {
+		if(err) {
+			res.json(err);
+		} else if(userData.userid != req.user.id) {
+			return common.noPermission(req, res);
+		} else {
+			next();
+		}
+	});
+}

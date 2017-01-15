@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
+var utils = require('../utils/common');
 
 router.get('/', function(req, res) {
 	Post.find({})
+	.populate('author')
 	.sort('-createdAt')
 	.exec(function(err, posts) {
 		if(err) return res.json(err);
@@ -12,14 +14,20 @@ router.get('/', function(req, res) {
 });
 
 // Write
-router.get('/write', function(req, res) {
+router.get('/write', utils.isLoggedIn, function(req, res) {
 	res.render('post/write');
 });
 
 // create
-router.post('/', function(req, res) {
+router.post('/', utils.isLoggedIn, function(req, res) {
+	req.body.author = req.user._id;
 	Post.create(req.body, function(err, posts) {
-		if(err) res.json(err);
+		if(err) {
+			req.flash('posts', req.body);
+			req.flash('errors', utils.parseError(err));
+			console.log(err);
+			res.redirect('/posts/write');
+		}
 		else res.redirect('/posts');
 	});
 });
@@ -27,6 +35,7 @@ router.post('/', function(req, res) {
 // Show
 router.get('/:id', function(req, res) {
 	Post.findOne({_id:req.params.id})
+		.populate('author')
 		.exec(function(err, posts) {
 		if(err) res.json(err);
 		else res.render('post/show', {posts:posts});
@@ -34,7 +43,7 @@ router.get('/:id', function(req, res) {
 });
 
 // Edit
-router.get('/:id/edit', function(req, res) {
+router.get('/:id/edit', utils.isLoggedIn, checkPermission, function(req, res) {
 	Post.findOne({_id:req.params.id}, function(err, posts) {
 		if(err) res.json(err);
 		else res.render('post/edit', {posts:posts});
@@ -42,7 +51,7 @@ router.get('/:id/edit', function(req, res) {
 });
 
 // Update
-router.put('/:id', function(req, res) {
+router.put('/:id', utils.isLoggedIn, checkPermission, function(req, res) {
 	Post.findOne({_id:req.params.id})
 	.exec(function(err, post) {
 		if(err) res.json(err);
@@ -59,7 +68,7 @@ router.put('/:id', function(req, res) {
 });
 
 // Delete
-router.delete('/:id', function(req, res) {
+router.delete('/:id', utils.isLoggedIn, checkPermission, function(req, res) {
 	Post.remove({_id:req.params.id}, function(err) {
 		if(err) res.json(err);
 		else res.redirect('/posts');
@@ -67,3 +76,15 @@ router.delete('/:id', function(req, res) {
 });
 
 module.exports = router;
+
+function checkPermission(req, res, next) {
+	Post.findOne({_id: req.params.id}, function(err, posts) {
+		if(err) {
+			return res.json(err);
+		} else if(post.author != req.user.id) {
+			return utils.noPermission(req, res);
+		} else {
+			next();
+		}
+	});
+}

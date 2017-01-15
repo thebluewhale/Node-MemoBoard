@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-const Account = mongoose.Schema({
+const accountSchema = mongoose.Schema({
 	userid: {
 		type: String,
 		required: true,
@@ -31,23 +31,23 @@ const Account = mongoose.Schema({
 	}
 });
 
-Account.virtual('passwordConfirmation')
+accountSchema.virtual('passwordConfirmation')
 .get(function() { return this._passwordConfirmation; })
 .set(function(value) { this._passwordConfirmation=value; });
 
-Account.virtual('originalPassword')
+accountSchema.virtual('originalPassword')
 .get(function() { return this._originalPassword; })
 .set(function(value) { this._originalPassword=value; });
 
-Account.virtual('currentPassword')
+accountSchema.virtual('currentPassword')
 .get(function() { return this._currentPassword; })
 .set(function(value) { this._currentPassword=value; });
 
-Account.virtual('newPassword')
+accountSchema.virtual('newPassword')
 .get(function() { return this._newPassword; })
 .set(function(value) { this._newPassword=value; });
 
-Account.pre('save', function(next) {
+accountSchema.pre('save', function(next) {
 	let userData = this;
 	if(!userData.isModified('password')) {
 		return next();
@@ -57,14 +57,14 @@ Account.pre('save', function(next) {
 	}
 });
 
-Account.methods.authenticate = function(password) {
+accountSchema.methods.authenticate = function(password) {
 	let userData = this;
 	return bcrypt.compareSync(password, userData.password);
 }
 
-Account.path('password').validate(function(v) {
-	let passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
-	let passwordRegexError = '8-12 length available';
+accountSchema.path('password').validate(function(v) {
+	let passwordRegex = /^.{8,16}$/;
+	let passwordRegexError = '8-16 length available';
 	let userData = this;
 
 	if(userData.isNew) {
@@ -81,13 +81,13 @@ Account.path('password').validate(function(v) {
 		} else if(userData.currentPassword &&
 			!(bcrypt.compareSync(userData.currentPassword, userData.originalPassword))) {
 			userData.invalidate('currentPassword', 'current password is invalid');
-		} else if(userData.newPassword !== userData.passwordConfirmation) {
-			userData.invalidate('passwordConfirmation', 'password confirmation is not matched');
-		} else if(!passwordRegex.test(userData.password)) {
+		} else if(userData.newPassword && !passwordRegex.test(userData.newPassword)) {
 			userData.invalidate('newPassword', passwordRegexError);
+		} else if(userData.newPassword && (userData.newPassword !== userData.passwordConfirmation)) {
+			userData.invalidate('passwordConfirmation', 'password confirmation is not matched');
 		}
 	}
 });
 
-const _Account = mongoose.model('account', Account);
-module.exports = _Account;
+const Account = mongoose.model('account', accountSchema);
+module.exports = Account;

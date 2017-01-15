@@ -16,6 +16,9 @@
 				<div class="edit-account-upper-margin">
 					<label for="username" class="w3-label w3-text-teal">User Name</label>
 					<input type="text" id="username" class="w3-input w3-border w3-sand" name="username" value="<%= userData.username %>">
+					<% if(errors.username) { %>
+						<span class="w3-text-pink"><%= errors.username.message %></span>
+					<% } %>
 				</div>
 				<div class="edit-account-upper-margin">
 					<label for="email" class="w3-label w3-text-teal">E-mail</label>
@@ -24,14 +27,23 @@
 				<div class="edit-account-upper-margin">
 					<label for="password" class="w3-label w3-text-teal">Current Password</label>
 					<input type="password" id="currentPassword" class="w3-input w3-border w3-sand" name="currentPassword" value="">
+					<% if(errors.currentPassword) { %>
+						<span class="w3-text-pink"><%= errors.currentPassword.message %></span>
+					<% } %>
 				</div>
 				<div class="edit-account-upper-margin">
 					<label for="password" class="w3-label w3-text-teal">New Password</label>
 					<input type="password" id="newPassword" class="w3-input w3-border w3-sand" name="newPassword" value="">
+					<% if(errors.newPassword) { %>
+						<span class="w3-text-pink"><%= errors.newPassword.message %></span>
+					<% } %>
 				</div>
 				<div class="edit-account-upper-margin">
 					<label for="passwordConfirmation" class="w3-label w3-text-teal">Password Confirm</label>
 					<input type="password" id="passwordConfirmation" class="w3-input w3-border w3-sand" name="passwordConfirmation" value="">
+					<% if(errors.passwordConfirmation) { %>
+						<span class="w3-text-pink"><%= errors.passwordConfirmation.message %></span>
+					<% } %>
 				</div>
 				<div class="edit-account-upper-margin">
 					<button type="submit" class="w3-btn w3-teal button-size" name="button">Modify</button>

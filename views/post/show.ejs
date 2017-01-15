@@ -10,17 +10,26 @@
 		<div class="post-body">
 			<div class="w3-card-4 post-upper-margin">
 				<div>
-					<h2 class="w3-container w3-teal">Title : <%= posts.title %></h3>
+					<h2 class="w3-container w3-teal"><b><%= posts.title %></b></h3>
+				</div>
+				<div class="w3-container">
+					<% if(posts.author.username) %>
+						<span>written by <b><%= posts.author.username %></b></span>
+				</div>
+				<div class="w3-container">
+					<div>
+						<span>created at [ <%= posts.createdDate %>, <%=posts.createdTime %> ]</span>
+					</div>
+					<div>
+						<% if(posts.updatedAt) %>
+							<span>updated at [ <%= posts.updatedDate %>, <%= posts.updatedTime %> ]</span>
+					</div>
 				</div>
 				<div class="post-upper-margin post-content-size">
 					<h3 class="w3-container"><%= posts.content %><h3>
 				</div>
-				<div class="w3-container post-upper-margin">
-					<span>created at <%= posts.createdDate %></span>
-					<% if(posts.updatedAt) %>
-						<span>updated at <%= posts.updatedDate %></span>
-				</div>
 			</div>
+			<% if(isAuthenticated && (currentUser.id == posts.author.id)) { %>
 			<a href='/posts/<%= posts._id %>/edit'>
 				<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
 					Edit
@@ -33,6 +42,7 @@
 				</button>
 				</a>
 			</form>
+			<% } %>
 			<a href='/posts/'>
 				<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
 					List

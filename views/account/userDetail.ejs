@@ -13,9 +13,11 @@
 				<li class="w3-padding-16">User Name : <%= userData.username %></li>
 				<li class="w3-padding-16">E-mail : <%= userData.email %></li>
 			</ul>
+			<% if(isAuthenticated && (currentUser.id == userData.id)) { %>
 			<a href="/account/<%= userData.userid %>/edit">
 				<button type="button" class="w3-btn w3-teal button-size user-detail-margin">Edit</button>
 			</a>
+			<% } %>
 
 		</div>
 	</body>

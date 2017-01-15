@@ -10,6 +10,11 @@ const postSchema = mongoose.Schema({
 		type: String,
 		required: [true, 'Contents is required']
 	},
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "account",
+		required: true
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now
