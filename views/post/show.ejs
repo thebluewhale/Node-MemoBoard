@@ -27,12 +27,17 @@
 				</button>
 			</a>
 			<form action="/posts/<%= posts._id %>?_method=delete" method="post">
-				<a href="#" onclick='confirm("delete?") ? this.parentElement.submit() : null;'>
+				<a href="#" onclick='confirm("Delete this post?") ? this.parentElement.submit() : null;'>
 					<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
 					Delete
 				</button>
 				</a>
 			</form>
+			<a href='/posts/'>
+				<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
+					List
+				</button>
+			</a>
 		</div>
 	</body>
 

@@ -23,7 +23,6 @@ router.get('/create', function(req, res) {
 router.post('/', function(req, res) {
 	Account.create(req.body,function(err, user) {
 		if(err) {
-			console.log(err);
 			req.flash('account', req.body);
 			req.flash('errors', common.parseError(err));
 			return res.redirect('/account/create');
@@ -66,8 +65,8 @@ router.put('/:userid', function(req, res, next) {
 		userData.originalPassword = userData.password;
 		userData.password = req.body.newPassword ? req.body.newPassword : userData.password;
 
-		for(let p in req.body) {
-			userData[p] = req.body[p];
+		for(let param in req.body) {
+			userData[param] = req.body[param];
 		}
 
 		userData.save(function(err, userData) {

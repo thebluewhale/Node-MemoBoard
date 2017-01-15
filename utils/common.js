@@ -5,11 +5,19 @@ common.parseError = function(err) {
 	if(err.name == 'ValidationError') {
 		for(let name in err.errors) {
 			let validationError = err.errors[name];
-			if(name == 'userid') { parsed[name] = { message: "User ID is required" } };
-			if(name == 'username') { parsed[name] = { message: "User Name is required" } };
-			if(name == 'email') { parsed[name] = { message: "Emain Address is required" } };
-			if(name == 'password') { parsed[name] = { message: "Password is required" } };
-			if(name == 'passwordConfirmation') { parsed[name] = { message: "Password Confimation is required" } };
+			if(name == 'userid') {
+				parsed[name] = { message: "User ID is required" }
+			} else if(name == 'username') {
+				parsed[name] = { message: "User Name is required" }
+			} else if(name == 'email') {
+				parsed[name] = { message: "Emain Address is required" }
+			} else if(name == 'password') {
+				parsed[name] = { message: "Password is required" }
+			} else if(name == 'passwordConfirmation') {
+				parsed[name] = { message: "Password Confimation is required" }
+			} else {
+				parsed[name] = { message: validationError.message.replace("Path ", "Error : ") }
+			}
 		}
 	} else if(err.code == '11000' && err.errmsg.indexOf('userid') > 0) {
 		parsed.userid = { message: 'This User ID already exists' };

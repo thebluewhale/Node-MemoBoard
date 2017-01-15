@@ -18,7 +18,6 @@ router.get('/write', function(req, res) {
 
 // create
 router.post('/', function(req, res) {
-	req.body.author = req.user._id;
 	Post.create(req.body, function(err, posts) {
 		if(err) res.json(err);
 		else res.redirect('/posts');
@@ -44,9 +43,18 @@ router.get('/:id/edit', function(req, res) {
 
 // Update
 router.put('/:id', function(req, res) {
-	Post.findOne({_id:req.params.id}, req.body, function(err, posts) {
+	Post.findOne({_id:req.params.id})
+	.exec(function(err, post) {
 		if(err) res.json(err);
-		else res.redirect('/posts/' + req.params.id);
+
+		for(let param in req.body) {
+			post[param] = req.body[param];
+		}
+
+		post.save(function(err, post) {
+			if(err) res.json(err);
+			else res.redirect('/posts/' + req.params.id);
+		});
 	});
 });
 
