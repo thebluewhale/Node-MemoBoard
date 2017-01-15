@@ -81,7 +81,7 @@ function checkPermission(req, res, next) {
 	Post.findOne({_id: req.params.id}, function(err, posts) {
 		if(err) {
 			return res.json(err);
-		} else if(post.author != req.user.id) {
+		} else if(posts.author != req.user.id) {
 			return utils.noPermission(req, res);
 		} else {
 			next();

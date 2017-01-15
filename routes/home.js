@@ -1,6 +1,8 @@
 var express = require('express');
 var router  = express.Router();
 var passport = require('../utils/passport');
+var Account = require('../models/Account');
+var common = require('../utils/common');
 
 // Router for home
 router.get('/', function(req, res){
@@ -44,6 +46,15 @@ router.post('/login', function(req, res, next) {
 router.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
+});
+
+router.get('/allusers', common.isLoggedIn, function(req, res) {
+	Account.find({})
+	.sort({userid: 1})
+	.exec(function(err, userData) {
+		if(err) throw res.json(err);
+		else res.render('home/allusers', {userData:userData});
+	});
 });
 
 module.exports = router;

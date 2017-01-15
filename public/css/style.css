@@ -10,8 +10,8 @@
 .login-body {
 	margin: auto;
 	margin-top: 5%;
-	width: 50%;
-	max-width: 400px;
+	width: 90%;
+	max-width: 500px;
 }
 
 .login-upper-margin {
@@ -21,8 +21,8 @@
 .create-account-body {
 	margin: auto;
 	margin-top: 5%;
-	width: 50%;
-	max-width: 400px;
+	width: 90%;
+	max-width: 500px;
 }
 
 .create-account-upper-margin {
@@ -32,8 +32,8 @@
 .user-detail-body {
 	margin: auto;
 	margin-top: 5%;
-	width: 50%;
-	max-width: 400px;
+	width: 90%;
+	max-width: 500px;
 }
 
 .user-detail-margin {
@@ -45,10 +45,11 @@
 }
 
 .post-body {
-	min-width: 300px;
-	max-width: 1000px;
 	margin: auto;
 	margin-top: 5%;
+	width: 90%;
+	max-width: 1000px;
+	height: 90%;
 }
 
 .post-upper-margin {
@@ -60,10 +61,10 @@
 }
 
 .post-content-size {
-	min-width: 300px;
-	max-width: 1000px;
-	min-height: 90%;
-	height: 400px;
+	margin: auto;
+	margin-top: 5%;
+	min-height: 200px;
+	max-height: 1000px;
 }
 
 .text-ellipsis {
@@ -72,4 +73,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.allusers-body {
+	margin: auto;
+	margin-top: 5%;
+	width: 90%;
+	max-width: 400px;
 }

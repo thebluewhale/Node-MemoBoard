@@ -43,5 +43,5 @@ app.use('/account', account);
 app.use('/posts', post);
 
 // Port settingx
-app.listen(3000, function() { console.log('port : 3000'); });
-//app.listen(3000, "192.168.0.11");
+//app.listen(3000, function() { console.log('port : 3000'); });
+app.listen(3000, "192.168.0.11");
