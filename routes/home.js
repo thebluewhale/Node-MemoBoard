@@ -49,12 +49,16 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/allusers', common.isLoggedIn, function(req, res) {
-	Account.find({})
-	.sort({userid: 1})
-	.exec(function(err, userData) {
-		if(err) throw res.json(err);
-		else res.render('home/allusers', {userData:userData});
-	});
+	if(req.user.userid != 'master') {
+		res.redirect('/');
+	} else {
+		Account.find({})
+		.sort({userid: 1})
+		.exec(function(err, userData) {
+			if(err) throw res.json(err);
+			else res.render('home/allusers', {userData:userData});
+		});
+	}
 });
 
 module.exports = router;
