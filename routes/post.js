@@ -62,7 +62,8 @@ router.put('/:id', utils.isLoggedIn, checkPermission, function(req, res) {
 
 		post.save(function(err, post) {
 			if(err) res.json(err);
-			else res.redirect('/posts/' + req.params.id);
+			//else res.redirect('/posts/' + req.params.id);
+			else res.redirect('/posts/');
 		});
 	});
 });

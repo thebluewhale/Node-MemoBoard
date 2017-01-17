@@ -15,33 +15,40 @@
 					</button>
 				</a>
 			<% } %>
-			<div class="post-upper-margin">
-				<table class="w3-table-all w3-hoverable w3-card-4">
-					<thread>
-						<tr class="w3-teal">
-							<th>TItle</th>
-							<th>Date</th>
-							<th>Author</th>
-						</tr>
-					</thread>
-					<tbody>
-						<% if(posts == null || posts.length == 0) { %>
-							<tr>
-								<td>No post now</td>
-							</tr>
-						<% } else { posts.forEach(function(post) { %>
-							<tr>
-								<td>
-									<a href="/posts/<%= post._id %>"><div class="text-ellipsis"><%= post.title %></div></a>
-								</td>
-								<td><%= post.createdDate %>, <%= post.createdTime %></td>
-							<% if(post.author.username) %>
-								<td><%= post.author.username %></td>
-							</tr>
-						<% })} %>
-					</tbody>
-				</table>
+
+			<% if(posts == null || posts.length == 0) { %>
+				<div class="w3-container">
+					No Post yet
+				</div>
+			<% } else { posts.forEach(function(post) { %>
+			<div class="w3-card-4 post-card">
+				<header class="w3-container w3-blue-grey">
+					<h3><b><%= post.title %></b></h3>
+				</header>
+
+				<div class="w3-container post-each-card">
+					<h5><%= post.content %><h5>
+				</div>
+
+				<footer class="w3-container w3-light-grey">
+					<p><b><%= post.author.username %></b>  |  at <%= post.createdDate %>, <%= post.createdTime %></p>
+					<% if(isAuthenticated && (currentUser.id == post.author.id)) { %>
+					<a href='/posts/<%= post._id %>/edit'>
+						<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
+							Edit
+						</button>
+					</a>
+					<form action="/posts/<%= post._id %>?_method=delete" method="post">
+						<a href="#" onclick='confirm("Delete this post?") ? this.parentElement.submit() : null;'>
+							<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
+							Delete
+						</button>
+						</a>
+					</form>
+					<% } %>
+				</footer>
 			</div>
+			<% })} %>
 		</div>
 	</body>
 
