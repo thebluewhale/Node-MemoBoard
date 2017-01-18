@@ -59,12 +59,20 @@
 	max-height: 1000px;
 }
 
-.text-ellipsis {
-	display: block;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.post-footer {
+	margin: auto;
+	height: 30px;
+	width: 100%;
+}
+
+.post-icon {
+	float: right;
+	margin: 10px 10px 10px 10px;
+}
+
+.post-writer {
+	float: left;
+	margin: 15px 10px 10px 10px;
 }
 
 .allusers-body {
@@ -79,16 +87,21 @@
 	max-width: 700px;
 	margin: auto;
 	margin-top: 30px;
-	height: 100%;
 }
 
 .post-card {
 	margin: auto;
-	margin-top: 20px;
+	margin-top: 40px;
 	width: 100%;
 }
 
 .post-each-card {
 	width: 100%;
 	margin: auto;
+}
+
+.text-ellipsis {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

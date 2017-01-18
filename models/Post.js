@@ -4,11 +4,13 @@ var common = require('../utils/common');
 const postSchema = mongoose.Schema({
 	title: {
 		type: String,
-		required: [true, 'Title is required']
+		required: [true, 'Title is required'],
+		match: [/^.{1,30}$/, '1-30 length available']
 	},
 	content: {
 		type: String,
-		required: [true, 'Contents is required']
+		required: [true, 'Contents is required'],
+		match: [/^.{1,100}$/, '1-100 length available']
 	},
 	author: {
 		type: mongoose.Schema.Types.ObjectId,

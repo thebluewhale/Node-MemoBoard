@@ -10,7 +10,7 @@
 		<div class="post-body">
 			<% if(isAuthenticated) { %>
 				<a href="/posts/write">
-					<button type="button" class="w3-btn w3-teal button-size user-detail-margin">
+					<button type="button" class="w3-btn w3-blue-grey button-size user-detail-margin">
 						Write
 					</button>
 				</a>
@@ -23,33 +23,33 @@
 			<% } else { posts.forEach(function(post) { %>
 			<div class="w3-card-4 post-card">
 				<header class="w3-container w3-blue-grey">
-					<h3><b><%= post.title %></b></h3>
+					<h3 class="text-ellipsis"><b><%= post.title %></b></h3>
 				</header>
 
 				<div class="w3-container post-each-card">
-					<h5><%= post.content %><h5>
+					<h5 class="text-ellipsis"><%= post.content %><h5>
 				</div>
 
-				<footer class="w3-container w3-light-grey">
-					<p><b><%= post.author.username %></b>  |  at <%= post.createdDate %>, <%= post.createdTime %></p>
+				<div class="w3-container">
+					<%= post.createdDate %>, <%= post.createdTime %>
+				</div>
+
+				<div class="w3-container w3-light-grey">
+					<p class="post-writer">written by <b><%= post.author.username %></b></p>
 					<% if(isAuthenticated && (currentUser.id == post.author.id)) { %>
-					<a href='/posts/<%= post._id %>/edit'>
-						<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
-							Edit
-						</button>
-					</a>
-					<form action="/posts/<%= post._id %>?_method=delete" method="post">
-						<a href="#" onclick='confirm("Delete this post?") ? this.parentElement.submit() : null;'>
-							<button type="button" class="w3-btn w3-gray button-size post-upper-margin">
-							Delete
-						</button>
+						<a class="post-icon" href='/posts/<%= post._id %>/edit'>
+							<i class="material-icons">edit</i>
 						</a>
-					</form>
+						<form class="post-icon" action="/posts/<%= post._id %>?_method=delete" method="post">
+							<a href="#" onclick='confirm("Delete this post?") ? this.parentElement.submit() : null;'>
+								<i class="material-icons">delete</i>
+							</a>
+						</form>
 					<% } %>
-				</footer>
+				</div>
 			</div>
 			<% })} %>
 		</div>
+		<div class="post-footer"></div>
 	</body>
-
 </html>

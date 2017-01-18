@@ -12,16 +12,16 @@
 			<form action="/posts/<%= posts._id %>?_method=put" method="post">
 				<div>
 					<div class="post-upper-margin">
-						<label for="title" class="w3-label w3-text-teal">Title</label>
+						<label for="title" class="w3-label w3-text-blue-grey">Title</label>
 						<input type="text" id="title" class="w3-input w3-border w3-sand" name="title" value="<%= posts.title %>">
 					</div>
 					<div class="post-upper-margin">
-						<label for="content" class="w3-label w3-text-teal">Content</label>
+						<label for="content" class="w3-label w3-text-blue-grey">Content</label>
 						<textarea id="content" class="w3-input w3-border w3-sand" name="content" rows="10"><%= posts.content %></textarea>
 					</div>
 				</div>
 				<div class="post-upper-margin">
-					<button type="submit" class="w3-btn w3-teal button-size post-upper-margin">Modify</button>
+					<button type="submit" class="w3-btn w3-blue-grey button-size post-upper-margin">Modify</button>
 				</div>
 			</form>
 		</div>
